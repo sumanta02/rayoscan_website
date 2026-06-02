@@ -1,0 +1,1684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rayoscan AI Diagnostics | Dental AI Platform for OPG, RVG and Bone Loss Analysis</title>
+  <meta name="description" content="Rayoscan is a Dental AI platform for OPG analysis, RVG analysis, bone loss review, structured dental radiology reports, and pilot-ready clinical AI workflows." />
+  <meta name="keywords" content="Dental AI, best dental AI platform, dental radiology AI, OPG analysis, RVG analysis, bone loss detection, dental reporting platform, AI dental diagnostics" />
+  <meta property="og:title" content="Rayoscan AI Diagnostics" />
+  <meta property="og:description" content="Dental AI platform for OPG, RVG, bone loss analysis, structured reports, and pilot-ready clinical workflows." />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #14365f;
+      --blue: #2d73ea;
+      --cyan: #4bb8ff;
+      --teal: #65d3d0;
+      --bg: #f5f9ff;
+      --card: #ffffff;
+      --line: #dbe7f6;
+      --text: #173452;
+      --muted: #687c92;
+      --shadow-sm: 0 10px 28px rgba(20,54,95,0.08);
+      --shadow-lg: 0 30px 60px rgba(20,54,95,0.13);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: "Manrope", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* ── subtle grid overlay ─────────────────────── */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(45,115,234,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(45,115,234,0.04) 1px, transparent 1px);
+      background-size: 64px 64px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── nav ─────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 16px 5%;
+      background: rgba(245,249,255,0.82);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(219,231,246,0.8);
+    }
+
+    .nav-logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+
+    .nav-logo img {
+      width: 40px;
+      height: 40px;
+      border-radius: 11px;
+      object-fit: cover;
+      background: #fff;
+      box-shadow: 0 8px 20px rgba(20,54,95,0.10);
+    }
+
+    .nav-logo-text {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--navy);
+      letter-spacing: -0.02em;
+    }
+
+    .nav-logo-text span { color: var(--blue); }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      transition: color .16s;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0; right: 0; bottom: -5px;
+      height: 2px;
+      border-radius: 99px;
+      background: linear-gradient(90deg, var(--blue), var(--teal));
+      transform: scaleX(0);
+      transform-origin: center;
+      transition: transform .16s;
+    }
+
+    .nav-links a:hover { color: var(--navy); }
+    .nav-links a:hover::after { transform: scaleX(1); }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+
+    .btn-nav {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 0 18px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--navy);
+      font-size: 13px;
+      font-weight: 800;
+      font-family: inherit;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform .16s, border-color .16s, box-shadow .16s;
+    }
+
+    .btn-nav:hover {
+      transform: translateY(-1px);
+      border-color: #b9d2f8;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .btn-nav-fill {
+      background: linear-gradient(135deg, var(--navy), var(--blue));
+      color: #fff;
+      border-color: transparent;
+    }
+
+    .btn-nav-fill:hover { border-color: transparent; }
+
+    /* ── hero ─────────────────────────────────────── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 140px 24px 100px;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(90px);
+      opacity: 0.28;
+      pointer-events: none;
+    }
+
+    .blob-1 {
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, #2d73ea 0%, transparent 70%);
+      top: -250px; left: -220px;
+      animation: drift1 14s ease-in-out infinite;
+    }
+
+    .blob-2 {
+      width: 560px; height: 560px;
+      background: radial-gradient(circle, #65d3d0 0%, transparent 70%);
+      bottom: -150px; right: -180px;
+      animation: drift2 18s ease-in-out infinite;
+    }
+
+    .blob-3 {
+      width: 420px; height: 420px;
+      background: radial-gradient(circle, #4bb8ff 0%, transparent 70%);
+      top: 40%; left: 55%;
+      animation: drift3 11s ease-in-out infinite;
+    }
+
+    @keyframes drift1 {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33%       { transform: translate(60px, 50px) scale(1.06); }
+      66%       { transform: translate(-30px, 80px) scale(0.94); }
+    }
+
+    @keyframes drift2 {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50%       { transform: translate(-60px, -40px) scale(1.09); }
+    }
+
+    @keyframes drift3 {
+      0%, 100% { transform: translate(0, 0); }
+      50%       { transform: translate(50px, -60px); }
+    }
+
+    /* ── hero video background ───────────────────── */
+    .hero-video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+    }
+
+    .hero-video-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        180deg,
+        rgba(5,14,30,0.62) 0%,
+        rgba(5,14,30,0.50) 50%,
+        rgba(5,14,30,0.72) 100%
+      );
+      z-index: 0;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 9px 18px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.10);
+      border: 1px solid rgba(255,255,255,0.22);
+      backdrop-filter: blur(10px);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.92);
+      margin-bottom: 32px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .eyebrow-pulse {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--blue), var(--teal));
+      box-shadow: 0 0 0 4px rgba(75,184,255,0.18);
+      animation: pulse 2.4s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 0 4px rgba(75,184,255,0.18); }
+      50%       { box-shadow: 0 0 0 8px rgba(75,184,255,0.06); }
+    }
+
+    .hero h1 {
+      font-family: "Outfit", sans-serif;
+      font-size: clamp(56px, 9vw, 108px);
+      line-height: 0.90;
+      letter-spacing: -0.06em;
+      color: #ffffff;
+      text-shadow: 0 2px 24px rgba(0,0,0,0.28);
+      margin-bottom: 28px;
+      max-width: 1100px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero h1 .grad {
+      background: linear-gradient(120deg, var(--blue) 0%, var(--teal) 40%, var(--cyan) 70%, var(--blue) 100%);
+      background-size: 220% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: gradShift 7s linear infinite;
+    }
+
+    @keyframes gradShift {
+      0%   { background-position: 0% center; }
+      100% { background-position: 220% center; }
+    }
+
+    .hero-sub {
+      max-width: 620px;
+      color: rgba(255,255,255,0.78);
+      font-size: 17px;
+      line-height: 1.8;
+      margin-bottom: 40px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 52px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .btn-hero-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      min-height: 56px;
+      padding: 0 28px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, var(--navy), var(--blue));
+      color: #fff;
+      font-size: 15px;
+      font-weight: 800;
+      font-family: inherit;
+      text-decoration: none;
+      box-shadow: 0 18px 38px rgba(45,115,234,0.28);
+      transition: transform .18s, box-shadow .18s;
+    }
+
+    .btn-hero-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 24px 44px rgba(45,115,234,0.36);
+    }
+
+    .btn-hero-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      min-height: 56px;
+      padding: 0 28px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.12);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.28);
+      font-size: 15px;
+      font-weight: 800;
+      font-family: inherit;
+      text-decoration: none;
+      backdrop-filter: blur(10px);
+      transition: transform .18s, background .18s, border-color .18s;
+    }
+
+    .btn-hero-outline:hover {
+      transform: translateY(-2px);
+      background: rgba(255,255,255,0.20);
+      border-color: rgba(255,255,255,0.45);
+    }
+
+    .hero-chips {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.10);
+      border: 1px solid rgba(255,255,255,0.22);
+      font-size: 12px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.90);
+      backdrop-filter: blur(10px);
+    }
+
+    .chip-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--blue), var(--teal));
+    }
+
+    /* ── capability marquee ──────────────────────── */
+    .cap-strip {
+      position: relative;
+      z-index: 1;
+      background: #0a3c78;
+      overflow: hidden;
+      padding: 10px 0;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      transform: translateZ(0);
+    }
+
+    .cap-track {
+      display: flex;
+      align-items: center;
+      width: max-content;
+      animation: marqueeSlide 70s linear infinite;
+      will-change: transform;
+    }
+
+    .cap-track:hover { animation-play-state: paused; }
+
+    @keyframes marqueeSlide {
+      from { transform: translate3d(0, 0, 0); }
+      to   { transform: translate3d(-50%, 0, 0); }
+    }
+
+    .cap-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 0 34px;
+      font-size: 12px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.82);
+      letter-spacing: .04em;
+      white-space: nowrap;
+    }
+
+    .cap-item svg { flex-shrink: 0; opacity: .7; }
+
+    .cap-sep {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.22);
+      flex-shrink: 0;
+    }
+
+    /* ── logos band ──────────────────────────────── */
+    .recognition-wrap {
+      position: relative;
+      z-index: 1;
+      background: #fff;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      padding: 20px 0;
+      overflow: hidden;
+      transform: translateZ(0);
+    }
+
+    .logos-track {
+      display: flex;
+      align-items: center;
+      width: max-content;
+      animation: logoSlide 16s linear infinite;
+      will-change: transform;
+    }
+
+    .logos-track:hover { animation-play-state: paused; }
+
+    @keyframes logoSlide {
+      from { transform: translate3d(0, 0, 0); }
+      to   { transform: translate3d(-50%, 0, 0); }
+    }
+
+    .logo-item {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 52px;
+      flex-shrink: 0;
+      cursor: pointer;
+      transition: transform .15s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .logo-item:hover { transform: scale(1.06); }
+
+    .logo-item.pop { animation: logoPop .32s cubic-bezier(0.34, 1.56, 0.64, 1); }
+
+    @keyframes logoPop {
+      0%   { transform: scale(1); }
+      45%  { transform: scale(1.22); }
+      100% { transform: scale(1); }
+    }
+
+    .logo-item img {
+      height: 54px;
+      width: auto;
+      max-width: 160px;
+      object-fit: contain;
+      display: block;
+    }
+
+    /* ── sections ─────────────────────────────────── */
+    .section {
+      position: relative;
+      z-index: 1;
+      width: min(1360px, calc(100% - 36px));
+      margin: 0 auto;
+      padding: 80px 0;
+      scroll-margin-top: 80px;
+    }
+
+    .section-inner {
+      padding: 36px;
+      border-radius: 32px;
+      background: rgba(255,255,255,0.92);
+      border: 1px solid rgba(219,231,246,0.95);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .section-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 7px 13px;
+      border-radius: 999px;
+      background: #edf5ff;
+      border: 1px solid #cfe0fb;
+      color: var(--blue);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .section-title {
+      font-family: "Outfit", sans-serif;
+      font-size: clamp(30px, 3.5vw, 48px);
+      line-height: 1.00;
+      letter-spacing: -0.05em;
+      color: var(--navy);
+      max-width: 800px;
+      margin-bottom: 10px;
+    }
+
+    .section-sub {
+      font-size: 14px;
+      line-height: 1.8;
+      color: var(--muted);
+      max-width: 680px;
+      margin-bottom: 32px;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      margin-bottom: 28px;
+    }
+
+    /* ── model cards ─────────────────────────────── */
+    .model-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .model-card {
+      position: relative;
+      padding: 22px;
+      border-radius: 24px;
+      background: #fff;
+      border: 1px solid var(--line);
+      overflow: hidden;
+      transition: transform .18s, box-shadow .18s, border-color .18s;
+    }
+
+    .model-card:hover {
+      transform: translateY(-5px);
+      border-color: #b7d3ff;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .model-card::after {
+      content: "";
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--blue), var(--teal));
+      opacity: 0;
+      transition: opacity .18s;
+    }
+
+    .model-card:hover::after { opacity: 1; }
+
+    .model-top {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      margin-bottom: 14px;
+    }
+
+    .model-top img {
+      width: 54px;
+      height: 54px;
+      object-fit: contain;
+      border-radius: 14px;
+      background: #f6fafe;
+      padding: 8px;
+      border: 1px solid #e2ecfb;
+    }
+
+    .model-eyebrow {
+      display: block;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 4px;
+    }
+
+    .model-name {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--navy);
+    }
+
+    .model-card p {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 14px;
+    }
+
+    .model-points {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+
+    .point {
+      display: inline-flex;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: #f6faff;
+      border: 1px solid #dce8f7;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--navy);
+    }
+
+    .coming-soon-badge {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: #f0f6ff;
+      border: 1px solid #d0e2fb;
+      font-size: 10px;
+      font-weight: 800;
+      color: var(--blue);
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+    }
+
+    /* ── prediction cards ────────────────────────── */
+    .pred-grid-top {
+      display: grid;
+      grid-template-columns: 1.25fr 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .pred-grid-bottom {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .pred-card {
+      border-radius: 24px;
+      background: #fff;
+      border: 1px solid var(--line);
+      overflow: hidden;
+      transition: transform .20s, box-shadow .20s, border-color .20s;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .pred-card:hover {
+      transform: translateY(-5px);
+      border-color: #a8c8ff;
+      box-shadow: 0 20px 44px rgba(20,54,95,0.13);
+    }
+
+    .pred-img-wrap {
+      position: relative;
+      overflow: hidden;
+      background: #0c1a2e;
+      height: 240px;
+    }
+
+    .pred-grid-bottom .pred-img-wrap {
+      height: 210px;
+    }
+
+    .pred-img-wrap img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: contain;
+      transition: transform .4s ease;
+    }
+
+    .pred-card:hover .pred-img-wrap img { transform: scale(1.03); }
+
+    .pred-img-wrap .pred-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(8,18,36,0.72) 0%, transparent 55%);
+    }
+
+    .pred-badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: rgba(8,18,36,0.72);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.14);
+      font-size: 10px;
+      font-weight: 800;
+      color: rgba(255,255,255,0.92);
+      letter-spacing: 0.05em;
+    }
+
+    .pred-badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #4ade80;
+      box-shadow: 0 0 0 3px rgba(74,222,128,0.25);
+    }
+
+    .pred-body {
+      padding: 20px 22px 22px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .pred-type {
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 6px;
+    }
+
+    .pred-card h3 {
+      font-size: 17px;
+      font-weight: 800;
+      color: var(--navy);
+      letter-spacing: -0.03em;
+      margin-bottom: 14px;
+      line-height: 1.2;
+    }
+
+    .pred-bullets {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      flex: 1;
+    }
+
+    .pred-bullets li {
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+      font-size: 12.5px;
+      line-height: 1.55;
+      color: var(--text);
+    }
+
+    .pred-bullets li::before {
+      content: "";
+      flex-shrink: 0;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--blue), var(--teal));
+      margin-top: 5px;
+    }
+
+    /* ── why rayoscan two-col ─────────────────────── */
+    .why-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .why-panel {
+      padding: 28px;
+      border-radius: 22px;
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, #fff, #f8fbff);
+    }
+
+    .why-panel h3 {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--navy);
+      letter-spacing: -0.03em;
+      margin-bottom: 16px;
+    }
+
+    .check-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 13px;
+    }
+
+    .check-list li {
+      display: flex;
+      gap: 11px;
+      font-size: 13px;
+      line-height: 1.65;
+      color: var(--text);
+    }
+
+    .tick {
+      flex-shrink: 0;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--blue), var(--teal));
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      font-weight: 800;
+      margin-top: 1px;
+    }
+
+    .audience-mini-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .audience-card {
+      padding: 16px;
+      border-radius: 16px;
+      background: #fff;
+      border: 1px solid var(--line);
+    }
+
+    .audience-card h4 {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--navy);
+      margin-bottom: 5px;
+    }
+
+    .audience-card p {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    /* ── founders ─────────────────────────────────── */
+    .founder-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr 1fr;
+      gap: 16px;
+      align-items: start;
+    }
+
+    .founder-intro-card {
+      padding: 28px;
+      border-radius: 22px;
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, #fff, #f8fbff);
+    }
+
+    .founder-intro-card h3 {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--navy);
+      letter-spacing: -0.03em;
+      margin-bottom: 10px;
+    }
+
+    .founder-intro-card p {
+      font-size: 13px;
+      line-height: 1.75;
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+
+    .founder-card {
+      padding: 24px;
+      border-radius: 22px;
+      border: 1px solid var(--line);
+      background: #fff;
+      transition: transform .18s, box-shadow .18s;
+    }
+
+    .founder-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .founder-photo {
+      width: 100%;
+      height: 210px;
+      object-fit: contain;
+      object-position: center top;
+      border-radius: 18px;
+      border: 1px solid #e2ecfb;
+      background: linear-gradient(180deg, #f8fbff, #eef5ff);
+      margin-bottom: 16px;
+      display: block;
+      padding: 6px;
+    }
+
+    .founder-avatar {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #edf5ff, #e0f7ff);
+      border: 2px solid #cfe0fb;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--blue);
+      margin-bottom: 16px;
+      letter-spacing: -0.03em;
+    }
+
+    .founder-role {
+      display: inline-flex;
+      padding: 6px 11px;
+      border-radius: 999px;
+      background: #edf5ff;
+      border: 1px solid #cfe0fb;
+      color: var(--blue);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .founder-card h3 {
+      font-size: 19px;
+      font-weight: 800;
+      color: var(--navy);
+      letter-spacing: -0.03em;
+      margin-bottom: 8px;
+    }
+
+    .founder-card p {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+
+    .founder-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      min-height: 40px;
+      padding: 0 14px;
+      border-radius: 11px;
+      text-decoration: none;
+      background: #fff;
+      border: 1px solid #bdd5fb;
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 800;
+      transition: transform .16s, box-shadow .16s;
+    }
+
+    .founder-link:hover {
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* ── CTA banner ───────────────────────────────── */
+    .cta-section {
+      position: relative;
+      z-index: 1;
+      width: min(1360px, calc(100% - 36px));
+      margin: 0 auto 60px;
+    }
+
+    .cta-inner {
+      position: relative;
+      overflow: hidden;
+      padding: 52px 48px;
+      border-radius: 32px;
+      background: linear-gradient(135deg, #14365f 0%, #1d5db8 55%, #45b9e9 100%);
+      color: #fff;
+      box-shadow: 0 34px 60px rgba(20,54,95,0.26);
+    }
+
+    .cta-inner::before {
+      content: "";
+      position: absolute;
+      width: 380px;
+      height: 380px;
+      right: -120px;
+      top: -140px;
+      background: radial-gradient(circle, rgba(255,255,255,0.14), transparent 68%);
+      pointer-events: none;
+    }
+
+    .cta-inner::after {
+      content: "";
+      position: absolute;
+      width: 260px;
+      height: 260px;
+      left: -80px;
+      bottom: -100px;
+      background: radial-gradient(circle, rgba(75,184,255,0.20), transparent 68%);
+      pointer-events: none;
+    }
+
+    .cta-layout {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1.3fr 0.8fr;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .cta-inner h2 {
+      font-family: "Outfit", sans-serif;
+      font-size: clamp(32px, 4vw, 52px);
+      line-height: 0.96;
+      letter-spacing: -0.05em;
+      margin-bottom: 14px;
+    }
+
+    .cta-inner p {
+      color: rgba(255,255,255,0.80);
+      font-size: 15px;
+      line-height: 1.8;
+      max-width: 680px;
+      margin-bottom: 22px;
+    }
+
+    .cta-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .btn-cta-white {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 52px;
+      padding: 0 24px;
+      border-radius: 14px;
+      background: #fff;
+      color: var(--navy);
+      font-size: 14px;
+      font-weight: 800;
+      font-family: inherit;
+      text-decoration: none;
+      transition: transform .16s, box-shadow .16s;
+    }
+
+    .btn-cta-white:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 30px rgba(20,54,95,0.18);
+    }
+
+    .btn-cta-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 52px;
+      padding: 0 24px;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.10);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.22);
+      font-size: 14px;
+      font-weight: 800;
+      font-family: inherit;
+      text-decoration: none;
+      transition: transform .16s, background .16s;
+    }
+
+    .btn-cta-ghost:hover {
+      transform: translateY(-2px);
+      background: rgba(255,255,255,0.16);
+    }
+
+    .cta-seo {
+      padding: 22px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.09);
+      border: 1px solid rgba(255,255,255,0.16);
+      backdrop-filter: blur(10px);
+    }
+
+    .cta-seo strong {
+      display: block;
+      font-size: 16px;
+      margin-bottom: 8px;
+    }
+
+    .cta-seo p {
+      font-size: 13px;
+      margin-bottom: 14px;
+    }
+
+    .seo-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+
+    .seo-tags span {
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.15);
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    /* ── footer ───────────────────────────────────── */
+    footer {
+      position: relative;
+      z-index: 1;
+      padding: 28px 5% 32px;
+      text-align: center;
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.8;
+      border-top: 1px solid var(--line);
+    }
+
+    footer a {
+      color: var(--blue);
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    /* ── reveal animation ─────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(26px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── responsive ───────────────────────────────── */
+    @media (max-width: 1180px) {
+      .model-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .pred-grid-top { grid-template-columns: 1fr; }
+      .pred-grid-bottom { grid-template-columns: 1fr 1fr; }
+      .founder-grid { grid-template-columns: 1fr 1fr; }
+      .founder-intro-card { grid-column: 1 / -1; }
+      .cta-layout { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 860px) {
+      .nav-links { display: none; }
+      .hero h1 { font-size: clamp(46px, 12vw, 72px); }
+      .pred-grid-bottom { grid-template-columns: 1fr; }
+      .why-grid { grid-template-columns: 1fr; }
+      .section-inner { padding: 24px; }
+    }
+
+    @media (max-width: 580px) {
+      .model-grid,
+      .feature-grid,
+      .founder-grid,
+      .audience-mini-grid { grid-template-columns: 1fr; }
+      .cta-inner { padding: 32px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── nav ─────────────────────────────────────── -->
+  <nav>
+    <a class="nav-logo" href="https://www.rayoscanai.com/">
+      <img src="static/Rad LOGO.jpeg" alt="Rayoscan Logo">
+      <span class="nav-logo-text">Rayoscan <span>AI</span> Diagnostics</span>
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="#models">Models</a></li>
+      <li><a href="#features">Features</a></li>
+      <li><a href="#platform">Platform</a></li>
+      <li><a href="#founders">Founders</a></li>
+    </ul>
+
+    <div class="nav-actions">
+      
+        <a href="https://101.53.138.129/signin" class="btn-nav">Sign In</a>
+        <a href="https://101.53.138.129/signup" class="btn-nav btn-nav-fill">Sign Up</a>
+      
+    </div>
+  </nav>
+
+  <!-- ── hero ─────────────────────────────────────── -->
+  <section class="hero">
+    <video class="hero-video" autoplay muted loop playsinline preload="auto">
+      <source src="static/hero_bg.mp4" type="video/mp4">
+    </video>
+    <div class="hero-video-overlay"></div>
+
+    <div class="hero-eyebrow">
+      <span class="eyebrow-pulse"></span>
+      Best Dental AI Radiology Platform
+    </div>
+
+    <h1>
+      Rayoscan Dental AI<br> built
+      for <span class="grad">OPG, RVG</span><br>
+      and <span class="grad">bone loss.</span>
+    </h1>
+
+    <p class="hero-sub">
+      Rayoscan gives dental clinics,colleges and hospitals fast, explainable AI analysis across OPG, RVG, and bone loss workflows, with structured reports, visual overlays, and pilot ready clinical tools.
+    </p>
+
+    <div class="hero-actions">
+      
+        <a href="https://101.53.138.129/signup" class="btn-hero-primary">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2H3a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1z"/><line x1="8" y1="5" x2="8" y2="11"/><line x1="5" y1="8" x2="11" y2="8"/></svg>
+          Get Early Access
+        </a>
+        <a href="https://101.53.138.129/signin" class="btn-hero-outline">Sign In →</a>
+      
+    </div>
+
+    <div class="hero-chips">
+      <span class="hero-chip"><span class="chip-dot"></span>OPG AI Analysis</span>
+      <span class="hero-chip"><span class="chip-dot"></span>RVG Layered Review</span>
+      <span class="hero-chip"><span class="chip-dot"></span>Bone Loss Detection</span>
+      <span class="hero-chip"><span class="chip-dot"></span>Structured Reports</span>
+      <span class="hero-chip"><span class="chip-dot"></span>Pilot-Ready Validation</span>
+    </div>
+  </section>
+
+  <!-- ── capability marquee ──────────────────────── -->
+  <div class="cap-strip" aria-hidden="true">
+    <div class="cap-track">
+      <span class="cap-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2 10C3 6 5 4 8 4s5 2 6 6"/><path d="M5.5 10c0 2 1 3.5 2.5 3.5S10.5 12 10.5 10"/></svg>Full Arch OPG Analysis</span>
+      <span class="cap-sep"></span>
+      <span class="cap-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M5.5 1.5c-1.5 0-3 1.5-3 3.5 0 1 .4 2.2.8 3.5.6 2 1.1 3.8 1.4 5 .2.5.5.5.6 0L6.2 12h3.6l.9 1.5c.1.5.4.5.6 0 .3-1.2.8-3 1.4-5 .4-1.3.8-2.5.8-3.5 0-2-1.5-3.5-3-3.5-.8 0-1.5.5-2 .5s-1.2-.5-2-.5z"/></svg>RVG Layered Caries Review</span>
+      <span class="cap-sep"></span>
+      <span class="cap-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="2,12 5,7 8,10 11,5 14,8"/></svg>Bone Loss Detection & Staging</span>
+      <span class="cap-sep"></span>
+      <span class="cap-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2H3a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1z"/><path d="M5 8h6M5 5h6M5 11h4"/></svg>Structured AI Dental Reports</span>
+      <span class="cap-sep"></span>
+      <span class="cap-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 2"/></svg>Fast Turnaround — Seconds</span>
+      <span class="cap-sep"></span>
+      <span class="cap-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3,8 6.5,11.5 13,4.5"/></svg>Dentist-Led Pilot Validation</span>
+      <span class="cap-sep"></span>
+      <span class="cap-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="14" height="9" rx="2"/><path d="M5 4V3a2 2 0 0 1 4 0v1"/></svg>RCT & Implant Detection</span>
+      <span class="cap-sep"></span>
+      <span class="cap-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2L8 14M2 8h12"/></svg>FDI Tooth Numbering</span>
+      <span class="cap-sep"></span>
+      <span class="cap-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="6"/><path d="M5 8h6M8 5v6"/></svg>Clinic & College Pilot Access</span>
+      <!-- duplicate for loop -->
+      <span class="cap-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2 10C3 6 5 4 8 4s5 2 6 6"/><path d="M5.5 10c0 2 1 3.5 2.5 3.5S10.5 12 10.5 10"/></svg>Full Arch OPG Analysis</span>
+      <span class="cap-sep"></span>
+      <span class="cap-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M5.5 1.5c-1.5 0-3 1.5-3 3.5 0 1 .4 2.2.8 3.5.6 2 1.1 3.8 1.4 5 .2.5.5.5.6 0L6.2 12h3.6l.9 1.5c.1.5.4.5.6 0 .3-1.2.8-3 1.4-5 .4-1.3.8-2.5.8-3.5 0-2-1.5-3.5-3-3.5-.8 0-1.5.5-2 .5s-1.2-.5-2-.5z"/></svg>RVG Layered Caries Review</span>
+      <span class="cap-sep"></span>
+      <span class="cap-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="2,12 5,7 8,10 11,5 14,8"/></svg>Bone Loss Detection & Staging</span>
+      <span class="cap-sep"></span>
+      <span class="cap-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2H3a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1z"/><path d="M5 8h6M5 5h6M5 11h4"/></svg>Structured AI Dental Reports</span>
+      <span class="cap-sep"></span>
+      <span class="cap-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 2"/></svg>Fast Turnaround — Seconds</span>
+      <span class="cap-sep"></span>
+      <span class="cap-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3,8 6.5,11.5 13,4.5"/></svg>Dentist-Led Pilot Validation</span>
+      <span class="cap-sep"></span>
+      <span class="cap-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="14" height="9" rx="2"/><path d="M5 4V3a2 2 0 0 1 4 0v1"/></svg>RCT & Implant Detection</span>
+      <span class="cap-sep"></span>
+      <span class="cap-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2L8 14M2 8h12"/></svg>FDI Tooth Numbering</span>
+      <span class="cap-sep"></span>
+      <span class="cap-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="6"/><path d="M5 8h6M8 5v6"/></svg>Clinic & College Pilot Access</span>
+    </div>
+  </div>
+
+  <!-- ── logos band ───────────────────────────────── -->
+  <div class="recognition-wrap">
+    <div class="logos-track">
+      <!-- Set 1 -->
+      <span class="logo-item"><img src="static/images/Branding%20LOGOs/BUILD.jpg" alt="BUILD"></span>
+      <span class="logo-item"><img src="static/images/Branding%20LOGOs/DPIIT%20Startup.jpg" alt="DPIIT Startup India"></span>
+      <span class="logo-item"><img src="static/images/Branding%20LOGOs/DPIIT.png" alt="DPIIT"></span>
+      <span class="logo-item"><img src="static/images/Branding%20LOGOs/Meity.png" alt="MeitY"></span>
+      <!-- Set 2 (duplicate for seamless loop) -->
+      <span class="logo-item"><img src="static/images/Branding%20LOGOs/BUILD.jpg" alt="BUILD"></span>
+      <span class="logo-item"><img src="static/images/Branding%20LOGOs/DPIIT%20Startup.jpg" alt="DPIIT Startup India"></span>
+      <span class="logo-item"><img src="static/images/Branding%20LOGOs/DPIIT.png" alt="DPIIT"></span>
+      <span class="logo-item"><img src="static/images/Branding%20LOGOs/Meity.png" alt="MeitY"></span>
+    </div>
+  </div>
+
+  <!-- ── models ─────────────────────────────────── -->
+  <section class="section reveal" id="models">
+    <div class="section-inner">
+      <div class="section-head">
+        <div>
+          <div class="section-tag">Model Families</div>
+          <h2 class="section-title">Four branded AI models powering the Rayoscan diagnostic roadmap.</h2>
+        </div>
+        <p class="section-sub">Each model family is designed for a specific radiology workflow — so teams can adopt the right lane first, then expand.</p>
+      </div>
+      <div class="model-grid">
+        <article class="model-card">
+          <div class="model-top">
+            <img src="static/images/OPG_MODELS.png" alt="RayoNova">
+            <div>
+              <span class="model-eyebrow">OPG models</span>
+              <div class="model-name">RayoNova</div>
+            </div>
+          </div>
+          <p>Broad panoramic review and report-ready OPG annotations for full-arch dental diagnostics.</p>
+          <div class="model-points">
+            <span class="point">Tooth numbering</span>
+            <span class="point">Caries</span>
+            <span class="point">Impaction</span>
+            <span class="point">Nerve proximity</span>
+            <span class="point">Periapical</span>
+          </div>
+        </article>
+
+        <article class="model-card">
+          <div class="model-top">
+            <img src="static/images/RVG_MODELS_LOGO.png" alt="RayoApex">
+            <div>
+              <span class="model-eyebrow">RVG models</span>
+              <div class="model-name">RayoApex</div>
+            </div>
+          </div>
+          <p>Detailed intraoral analysis with layer-aware RVG review and restorative diagnostics.</p>
+          <div class="model-points">
+            <span class="point">Tooth type</span>
+            <span class="point">Caries severity</span>
+            <span class="point">Implants</span>
+            <span class="point">RCT detection</span>
+            <span class="point">Tooth layers</span>
+          </div>
+        </article>
+
+        <article class="model-card">
+          <div class="model-top">
+            <img src="static/images/Bone_loss_LOgo.png" alt="RayoSpectra">
+            <div>
+              <span class="model-eyebrow">Bone loss models</span>
+              <div class="model-name">RayoSpectra</div>
+            </div>
+          </div>
+          <p>Dedicated periodontal review built for bone level analysis and severity-guided reporting.</p>
+          <div class="model-points">
+            <span class="point">Landmark review</span>
+            <span class="point">Severity staging</span>
+            <span class="point">Root-side analysis</span>
+            <span class="point">Dedicated reports</span>
+          </div>
+        </article>
+
+        <article class="model-card" style="background: linear-gradient(135deg, #f6faff, #edf8ff);">
+          <span class="coming-soon-badge">Coming soon</span>
+          <div class="model-top">
+            <div style="width:54px;height:54px;border-radius:14px;background:linear-gradient(135deg,#edf5ff,#ddf5ff);border:1px solid #cfe0fb;display:flex;align-items:center;justify-content:center;">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2d73ea" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="13,2 3,14 12,14 11,22 21,10 12,10"/></svg>
+            </div>
+            <div>
+              <span class="model-eyebrow">Full diagnostic AI</span>
+              <div class="model-name">RayoQuantum</div>
+            </div>
+          </div>
+          <p>Unified OPG, RVG, bone loss, and reporting into one cross-model diagnostic intelligence layer.</p>
+          <div class="model-points">
+            <span class="point">Unified workflow</span>
+            <span class="point">Cross-model review</span>
+            <span class="point">Platform AI</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── what we predict ───────────────────────── -->
+  <section class="section reveal" id="features" style="padding-top:0;">
+    <div class="section-inner">
+      <div class="section-head">
+        <div>
+          <div class="section-tag">What we predict</div>
+          <h2 class="section-title">Real AI outputs from our models — across every dental radiology workflow.</h2>
+        </div>
+        <p class="section-sub">Every image below is an actual Rayoscan model output. Each detection is explainable, visually grounded, and report-ready.</p>
+      </div>
+
+      <!-- Row 1: two flagship predictions -->
+      <div class="pred-grid-top">
+
+        <article class="pred-card">
+          <div class="pred-img-wrap">
+            <img src="static/images/Platform%20predcition%20images/ChatGPT%20Image%20May%2024%2C%202026%2C%2011_22_55%20PM.png" alt="OPG full arch AI analysis">
+            <div class="pred-overlay"></div>
+            <span class="pred-badge"><span class="pred-badge-dot"></span>RayoNova · OPG</span>
+          </div>
+          <div class="pred-body">
+            <div class="pred-type">Full Arch OPG Analysis</div>
+            <h3>Panoramic detection across all 32 tooth positions</h3>
+            <ul class="pred-bullets">
+              <li>FDI tooth numbering — every visible tooth labeled by position (Maxilla + Mandible)</li>
+              <li>Impacted tooth detection with angulation classification (mesioangular, vertical, horizontal)</li>
+              <li>Caries detection and surface localization from panoramic view</li>
+              <li>Nerve proximity and relation mapping for surgical planning (e.g. inferior alveolar nerve)</li>
+              <li>Color-coded overlays per finding type with confidence scoring</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="pred-card">
+          <div class="pred-img-wrap">
+            <img src="static/images/Platform%20predcition%20images/Caries%20and%20tooth.png" alt="Caries detection and tooth segmentation">
+            <div class="pred-overlay"></div>
+            <span class="pred-badge"><span class="pred-badge-dot"></span>RayoApex · RVG · 95% confidence</span>
+          </div>
+          <div class="pred-body">
+            <div class="pred-type">Caries Detection & Tooth Segmentation</div>
+            <h3>Severity-graded caries with full tooth and pulp mapping</h3>
+            <ul class="pred-bullets">
+              <li>Four-tier caries severity grading — Severe, Moderate, Mild, and Enamel-level caries</li>
+              <li>Multi-surface localization — Occlusal, Mesial, and Distal surfaces identified per tooth</li>
+              <li>Tooth segmentation boundary drawn per tooth unit</li>
+              <li>Pulp chamber detection for proximity-to-nerve assessment</li>
+              <li>Per-detection confidence score reported inline</li>
+            </ul>
+          </div>
+        </article>
+
+      </div>
+
+      <!-- Row 2: three supporting predictions -->
+      <div class="pred-grid-bottom">
+
+        <article class="pred-card">
+          <div class="pred-img-wrap">
+            <img src="static/images/Platform%20predcition%20images/Impants.png" alt="Dental implant detection">
+            <div class="pred-overlay"></div>
+            <span class="pred-badge"><span class="pred-badge-dot"></span>RayoApex · RVG</span>
+          </div>
+          <div class="pred-body">
+            <div class="pred-type">Implant Detection</div>
+            <h3>Implant localization with segmentation</h3>
+            <ul class="pred-bullets">
+              <li>Detects dental implants on periapical RVG images</li>
+              <li>Segmentation boundary drawn around each implant body</li>
+              <li>Handles multiple implants in the same frame</li>
+              <li>Works across varying radiographic densities and angulations</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="pred-card">
+          <div class="pred-img-wrap">
+            <img src="static/images/Platform%20predcition%20images/RC%20treated.png" alt="Root canal treated tooth detection">
+            <div class="pred-overlay"></div>
+            <span class="pred-badge"><span class="pred-badge-dot"></span>RayoApex · RVG · 96% confidence</span>
+          </div>
+          <div class="pred-body">
+            <div class="pred-type">RCT Tooth Detection</div>
+            <h3>Root canal fill and restoration identification</h3>
+            <ul class="pred-bullets">
+              <li>Gutta percha fill material detected within canal space</li>
+              <li>Crown and restoration (coronal seal) identified separately</li>
+              <li>Full tooth segmentation boundary alongside RCT findings</li>
+              <li>Confidence scoring per anatomical structure identified</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="pred-card">
+          <div class="pred-img-wrap">
+            <img src="static/images/Platform%20predcition%20images/rvg_boneloss_ai_20260524233907.png" alt="Bone loss analysis">
+            <div class="pred-overlay"></div>
+            <span class="pred-badge"><span class="pred-badge-dot"></span>RayoSpectra · Bone Loss</span>
+          </div>
+          <div class="pred-body">
+            <div class="pred-type">Bone Loss Analysis</div>
+            <h3>CEJ–ABL measurement and severity staging</h3>
+            <ul class="pred-bullets">
+              <li>Cemento-Enamel Junction (CEJ) and Alveolar Bone Level (ABL) landmark detection</li>
+              <li>Bone loss distance measured and displayed per tooth</li>
+              <li>Stage-based severity interpretation (mild / moderate / severe)</li>
+              <li>Visual measurement lines overlaid on the radiograph for clinical review</li>
+            </ul>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── platform / why ─────────────────────────── -->
+  <section class="section reveal" id="platform" style="padding-top:0;">
+    <div class="section-inner">
+      <div class="section-tag">Why Rayoscan</div>
+      <h2 class="section-title">Built for real diagnostic workflows, not isolated demos.</h2>
+      <p class="section-sub">We focus on practical radiology value: faster review, clearer findings, better communication, and a strong foundation for pilot adoption and product rollout.</p>
+      <div class="why-grid">
+        <div class="why-panel">
+          <h3>What we do</h3>
+          <ul class="check-list">
+            <li><span class="tick">&#10003;</span><span>Analyze OPG and RVG images with dedicated model families tailored to each study type.</span></li>
+            <li><span class="tick">&#10003;</span><span>Detect caries, impacted teeth, nerve proximity, implants, RCT-treated teeth, and bone loss with visual overlays.</span></li>
+            <li><span class="tick">&#10003;</span><span>Support model validation through pilot review lanes so dental experts can help improve accuracy.</span></li>
+            <li><span class="tick">&#10003;</span><span>Generate structured patient-friendly reports that help clinics communicate clearly and document faster.</span></li>
+          </ul>
+        </div>
+
+        <div class="why-panel">
+          <h3>Best for</h3>
+          <div class="audience-mini-grid">
+            <div class="audience-card">
+              <h4>Private clinics</h4>
+              <p>Speed up review, build structured reports, and improve patient explanation workflows.</p>
+            </div>
+            <div class="audience-card">
+              <h4>Dental colleges</h4>
+              <p>Access pilot-ready models for training, academic review, and collaborative validation.</p>
+            </div>
+            <div class="audience-card">
+              <h4>Internal dental teams</h4>
+              <p>Inspect edge cases, review model output quality, and shape future Rayoscan releases.</p>
+            </div>
+            <div class="audience-card">
+              <h4>External researchers</h4>
+              <p>Request live demos, explore the platform, and evaluate before joining a pilot lane.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── founders ──────────────────────────────── -->
+  <section class="section reveal" id="founders" style="padding-top:0;">
+    <div class="section-inner">
+      <div class="section-head">
+        <div>
+          <div class="section-tag">Founders</div>
+          <h2 class="section-title">The founding team building Rayoscan for modern dental diagnostics.</h2>
+        </div>
+        <p class="section-sub">Founder-led product direction across OPG, RVG, bone loss, and reporting workflows. Connect directly through LinkedIn.</p>
+      </div>
+
+      <div class="founder-grid">
+        <div class="founder-intro-card">
+          <h3>Why the founder section matters</h3>
+          <p>Rayoscan is not a generic imaging demo. It is being built as a branded dental AI platform with model families, pilot programs, review loops, and product rollout paths that clinics and colleges can actually adopt.</p>
+          <ul class="check-list">
+            <li><span class="tick">&#10003;</span><span>Founder-led product direction across OPG, RVG, bone loss, and reporting workflows.</span></li>
+            <li><span class="tick">&#10003;</span><span>Direct access to the team through pilot programs, live demos, and LinkedIn connections.</span></li>
+            <li><span class="tick">&#10003;</span><span>Clear focus on explainable Dental AI, visual reporting, and deployable clinical experiences.</span></li>
+          </ul>
+        </div>
+
+        <article class="founder-card">
+          <img class="founder-photo" src="static/images/founder1.jpg" alt="Dr. Sanjana Rajesh Upadhyay">
+          <span class="founder-role">Co-Founder & CEO</span>
+          <h3>Dr. Sanjana Rajesh Upadhyay</h3>
+          <p>Leading the Rayoscan vision across Dental AI product strategy, radiology workflows, pilot access programs, and branded clinical experiences.</p>
+          <a class="founder-link" href="https://www.linkedin.com/in/sanjana-upadhyay-742485276/" target="_blank" rel="noopener noreferrer">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            LinkedIn
+          </a>
+        </article>
+
+        <article class="founder-card">
+          <img class="founder-photo" src="static/images/founder2.jpg" alt="Diya Rao Joginipally">
+          <span class="founder-role">Co-Founder & CTO</span>
+          <h3>Diya Rao Joginipally</h3>
+          <p>Driving the Rayoscan technology stack with a focus on scalable Dental AI systems, platform engineering, and deployable clinical workflows.</p>
+          <a class="founder-link" href="https://www.linkedin.com/in/diya-rao-joginipally/?originalSubdomain=in" target="_blank" rel="noopener noreferrer">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            LinkedIn
+          </a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA banner ────────────────────────────── -->
+  <div class="cta-section reveal">
+    <div class="cta-inner">
+      <div class="cta-layout">
+        <div>
+          <h2>Start with the Dental AI workflow that fits your team.</h2>
+          <p>Join internal pilots, clinic pilots, reporting workflows, or request a demo to see how Rayoscan can support your next diagnostic workflow.</p>
+          <div class="cta-actions">
+            
+              <a href="https://101.53.138.129/signup" class="btn-cta-white">Get Early Access</a>
+            
+            <a href="dashboard_static.html" class="btn-cta-ghost">View Access Plans</a>
+            <a href="mailto:rayoscanaidiagnostics@gmail.com?subject=Rayoscan%20Live%20Demo" class="btn-cta-ghost">Request Demo</a>
+          </div>
+        </div>
+
+        <aside class="cta-seo">
+          <strong>Rayoscan positioning</strong>
+          <p>Modern Dental AI for clinics, colleges, and diagnostic teams across OPG, RVG, bone loss, and structured reporting.</p>
+          <div class="seo-tags">
+            <span>Dental AI</span>
+            <span>OPG Analysis</span>
+            <span>RVG Analysis</span>
+            <span>Bone Loss</span>
+            <span>Dental Reports</span>
+            <span>Best Dental Platform</span>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    Rayoscan AI Diagnostics is a clinical decision support tool. Final diagnosis and treatment decisions remain the responsibility of the licensed dentist.
+    &nbsp;&middot;&nbsp;<a href="dashboard_static.html">Access Plans</a>
+    &nbsp;&middot;&nbsp;<a href="mailto:rayoscanaidiagnostics@gmail.com">Contact Rayoscan</a>
+  </footer>
+
+  <script>
+    const revealObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add("visible"); });
+    }, { threshold: 0.10 });
+
+    document.querySelectorAll(".reveal").forEach(el => revealObs.observe(el));
+
+    document.querySelectorAll(".logo-item").forEach(el => {
+      el.addEventListener("click", () => {
+        el.classList.remove("pop");
+        void el.offsetWidth;
+        el.classList.add("pop");
+        el.addEventListener("animationend", () => el.classList.remove("pop"), { once: true });
+      });
+    });
+  </script>
+</body>
+</html>

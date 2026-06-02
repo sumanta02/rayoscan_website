@@ -1,0 +1,134 @@
+/* Reset & Base */
+body {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(to right, #dbefff, #f2faff);
+  color: #333;
+}
+
+body.centered-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* Reusable Containers */
+.container {
+  background: white;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+}
+
+/* Typography */
+h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #0077b6;
+}
+
+/* Forms */
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+/* Buttons */
+button,
+.cta-btn {
+  width: 100%;
+  padding: 12px;
+  background-color: #0077b6;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover,
+.cta-btn:hover {
+  background-color: #005f87;
+}
+
+/* Links */
+.link {
+  display: block;
+  margin-top: 15px;
+  text-align: center;
+  color: #0077b6;
+  text-decoration: none;
+}
+
+/* Dashboard Specific */
+.dashboard-container {
+  text-align: center;
+  background: white;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  max-width: 1000px;
+  margin: 60px auto;
+}
+
+.dashboard-container h1 {
+  color: #0077b6;
+  font-size: 38px;
+  margin-bottom: 10px;
+}
+
+.intro-text {
+  font-size: 18px;
+  color: #333;
+  margin-bottom: 30px;
+}
+
+/* Gallery */
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  padding: 40px 10%;
+}
+
+.gallery img {
+  width: 30%;
+  max-width: 300px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+  .gallery img {
+    width: 90%;
+  }
+}
+
+/* Signout */
+.signout-button {
+  background-color: transparent;
+  color: #0077b6;
+  border: 2px solid #0077b6;
+  padding: 10px 20px;
+  font-size: 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.signout-button:hover {
+  background-color: #0077b6;
+  color: white;
+}
